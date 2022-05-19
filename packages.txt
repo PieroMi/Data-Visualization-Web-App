@@ -1,2 +1,1 @@
-freeglut3-dev
-libtk8.6-dev
+libtk8.6
