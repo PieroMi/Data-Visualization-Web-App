@@ -2,7 +2,7 @@ import os
 import streamlit as st
 import numpy as np
 from PIL import Image
-import tkinter
+import _tkinter
 
 from multipage import Multipage
 from pages import January2021, February2021, March2021, April2021, May2021, June2021, July2021, August2021, September2021, October2021, November2021, December2021
