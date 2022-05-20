@@ -35,11 +35,11 @@ def app():
 
     with col1:
         st.subheader("Cash:")
-        st.subheader(f"${total_cards:,.2f}")
+        st.subheader(f"${total_cash:,.2f}")
       
     with col2:
         st.subheader("Cards:")
-        st.subheader(f"${total_cash:,.2f}") 
+        st.subheader(f"${total_cards:,.2f}") 
     with col3:
         st.subheader("Per Day:") 
         st.subheader(f"${average_per_day:,.2f}")   
