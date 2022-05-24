@@ -43,7 +43,7 @@ def app():
         st.subheader("Total Cards:")
         st.subheader(f"US $ {total_cards:,.2f}") 
     with average_column:
-        st.subheader("Average Per Transaction:") 
+        st.subheader("Average Per Sale:") 
         st.subheader(f"US ${average_salesMarch:,.2f}")
     with average_perDay_column:
         st.subheader("Average Per Day:")
