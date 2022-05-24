@@ -19,21 +19,21 @@ def app():
     def get_data_from_excel():
         df = pd.read_excel(
         io = excel_file, 
-        sheet_name='MAY', 
+        sheet_name='NOVEMBER', 
         usecols='B:AU',
         nrows=33
         )
         return df
     df = get_data_from_excel()
 
-    st.title(":pizza: May Sales")
+    st.title(":pizza: November Sales")
     st.markdown("##")
 
     total_cash = (df["EFECTIVO"].sum())
     total_cards = (df['Tarjetas'].sum())
     total_sales = (df['TOTAL'].sum())
-    average_salesMay = total_sales / df['Cobrados'].sum()
-    average_perDay = total_sales / 23
+    average_salesNovember = total_sales / df['Cobrados'].sum()
+    average_perDay = total_sales / 25
 
     cash_column, card_column, average_column, average_perDay_column, total_column = st.columns(5)
     with cash_column:
@@ -44,7 +44,7 @@ def app():
         st.subheader(f"US $ {total_cards:,.2f}") 
     with average_column:
         st.subheader("Average Per Sale:") 
-        st.subheader(f"US ${average_salesMay:,.2f}")
+        st.subheader(f"US ${average_salesNovember:,.2f}")
     with average_perDay_column:
         st.subheader("Average Per Day:")
         st.subheader(f"US ${average_perDay:,.2f}")
@@ -96,12 +96,12 @@ def app():
     soldPerHourColumn, productsPie = st.columns(2)
 
     with soldPerHourColumn:
-        fg_sales = df.groupby(by=["Product"]).sum()[["Hora 11" , "Hora 12" , "Hora 13" ,"Hora 14" , "Hora 15" , "Hora 16" , "Hora 17" ,"Hora 18" , "Hora 19" , "Hora 20" , "Hora 21" , "Hora 22" , "Hora 23"]]
+        fg_sales = df.groupby(by=["Product"]).sum()[["Hora 13", "Hora 14" , "Hora 15" , "Hora 16" , "Hora 17" ,"Hora 18" , "Hora 19" , "Hora 20" , "Hora 21" , "Hora 22" , "Hora 23", "Hora 24"]]
 
         sales_hour = px.bar(
                 fg_sales,
                 x=fg_sales.index,
-                y=["Hora 11" , "Hora 12" , "Hora 13", "Hora 14" , "Hora 15" , "Hora 16" , "Hora 17" ,"Hora 18" , "Hora 19" , "Hora 20" , "Hora 21" , "Hora 22" , "Hora 23"],
+                y=["Hora 13", "Hora 14" , "Hora 15" , "Hora 16" , "Hora 17" ,"Hora 18" , "Hora 19" , "Hora 20" , "Hora 21" , "Hora 22" , "Hora 23", "Hora 24"],
                 title = "<b>Top 5 Products Sold Per Hour</b>",
                 template = "plotly_white",
             )
@@ -125,13 +125,13 @@ def app():
         products_sold.update_traces(textposition = 'inside', textinfo = 'percent+label')
         st.plotly_chart(products_sold)        
 
-    may_tab = st.sidebar.checkbox('Expenses')
+    november_tab = st.sidebar.checkbox('Expenses')
 
     inventory_expenses = (df["Cost"].sum())
     employee_expenses = (df["Salary"].sum())
     total_expenses = (df["Cost"]).sum() + (df["Salary"]).sum()
 
-    if may_tab:
+    if november_tab:
         st.title(":chart_with_downwards_trend: Expenses")
         st.markdown("##")
         inv_expense_column, employee_salary_column, total_expenses_column = st.columns(3)
@@ -146,15 +146,15 @@ def app():
             st.subheader(f"US $ {total_expenses:,.2f}")
         st.markdown("---")
         
-        may_expense_column, may_expense_pie_column = st.columns(2)
+        november_expense_column, november_expense_pie_column = st.columns(2)
         
-        with may_expense_column:
-            mayExpenses = df.groupby(by=(["Expenses"])).sum()[["Cost"]].sort_values(by="Cost")
+        with november_expense_column:
+            novemberExpenses = df.groupby(by=(["Expenses"])).sum()[["Cost"]].sort_values(by="Cost")
 
             expenses = px.bar(
-                    mayExpenses,
+                    novemberExpenses,
                     x="Cost",
-                    y=mayExpenses.index,
+                    y=novemberExpenses.index,
                     orientation='h',
                     color_discrete_sequence=px.colors.sequential.RdBu,
                     template = "plotly_white"
@@ -167,7 +167,7 @@ def app():
                 )
             st.plotly_chart(expenses)
 
-        with may_expense_pie_column:
+        with november_expense_pie_column:
             expenses_pie = df.groupby(by=["Item"]).sum()[["Expense"]]
 
             expenses_pie_ = px.pie(
@@ -177,4 +177,4 @@ def app():
                     hole = .2,
                     color_discrete_sequence=px.colors.sequential.RdBu
             )
-            st.plotly_chart(expenses_pie_)              
+            st.plotly_chart(expenses_pie_)
