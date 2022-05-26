@@ -36,7 +36,6 @@ def app():
     with col1:
         st.subheader("Cash:")
         st.subheader(f"${total_cash:,.2f}")
-      
     with col2:
         st.subheader("Cards:")
         st.subheader(f"${total_cards:,.2f}") 
@@ -51,7 +50,8 @@ def app():
         st.subheader(f"${expenses:,.2f}")  
     with col6:
         st.subheader("Total Sales:")
-        st.subheader(f"${total_sales:,.2f}")  
+        st.subheader(f"${total_sales:,.2f}")
+    st.markdown("---")  
 
 
     col6, col7 = st.columns(2)
@@ -134,6 +134,7 @@ def app():
         figure.for_each_yaxis(lambda y: y.update(showgrid=False)) # This will delete the grid for y axis
 
         st.plotly_chart(figure)
+    st.markdown("---")
 
     @st.experimental_memo
     def get_data_from_excel():    
@@ -142,7 +143,7 @@ def app():
         df3 = pd.read_excel(excel_file,
                   sheet_name = sheet_name,
                   usecols = 'A : S',
-                  nrows = 67)
+                  nrows = 79)
         return df3
     df3 = get_data_from_excel()  
 
@@ -152,7 +153,7 @@ def app():
 
         productlist = df3["Producto"].unique().tolist()
 
-        product = st.multiselect("Select Product", productlist)
+        product = st.multiselect("Select Product to Analyze Sales Per Hour", productlist)
 
         dfs = {product: df3[df3["Producto"] == product] for product in product}
 
@@ -211,3 +212,4 @@ def app():
         figure.for_each_yaxis(lambda y: y.update(showgrid=False)) # This will delete the grid for y axis
 
         st.plotly_chart(figure)
+    st.markdown("---")
