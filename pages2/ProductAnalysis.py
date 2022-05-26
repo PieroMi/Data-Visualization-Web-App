@@ -26,8 +26,8 @@ def app():
         return df
     df = get_data_from_excel()
 
-    product = ['', 'Slices', 'Pizzas', 'Drinks', 'Wines', 'Sweets & Others']
-    select_product = st.sidebar.selectbox("Select A Category", product)
+    product = ['', 'Slices', 'Pizzas', 'Drinks', 'Wines', 'Beers', 'Sweets & Others']
+    select_product = st.sidebar.selectbox("Select A Category To Analyze its Performance", product)
 
     if select_product == 'Slices':
 
@@ -361,3 +361,70 @@ def app():
             st.plotly_chart(products_sold) 
           
                         
+    if select_product == 'Beers':
+        @st.experimental_memo
+        def get_data_from_excel():    
+                excel_file = 'POSTO SALES.xlsx'
+                sheet_name = 'BEERS'
+                df = pd.read_excel(excel_file,
+                          sheet_name = sheet_name,
+                          usecols = 'A:D',
+                          nrows = 144)
+                return df
+        df = get_data_from_excel()
+# 
+
+        producto = st.sidebar.multiselect("Select the Product:",
+                                   options= df["Producto"].unique(),
+                                   default= df["Producto"].unique()
+                                   )
+        Hora = st.sidebar.multiselect("Select the Hour:",
+                                   options= df["Hora"].unique(),
+                                   default= df["Hora"].unique()
+                                   )
+        df_selection = df.query(
+                                "Producto == @producto & Hora == @Hora" 
+
+        )
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            cantidad_vendida = (df_selection['Cantidad'].sum()) 
+            st.subheader(f"Amount of Products: {cantidad_vendida:,.2f}")  
+        with col2:
+            valor_vendida = (df_selection['Valor'].sum()) 
+            st.subheader(f"Total Sold: ${valor_vendida:,.2f}") 
+        with col3:
+            promedio_vendida = (valor_vendida / cantidad_vendida) 
+            st.subheader(f"Average Sold: ${promedio_vendida:,.2f}")  
+
+
+        col4, col5 = st.columns(2)
+        with col4:
+            bar_chart = px.bar(df_selection,
+                               x = 'Hora',
+                               y = 'Cantidad',
+                               color = 'Producto',
+                               )
+
+            bar_chart.update_layout(
+                font=dict(
+                family="Courier New, monospace",
+                size=15,
+                color="white"
+            )
+            )
+
+            bar_chart.for_each_xaxis(lambda x: x.update(showgrid=False))  # This will delete the grid for both x and y axis   
+            st.plotly_chart(bar_chart)
+
+        with col5:
+            all_products_sold = df_selection.groupby(by=["Producto"]).sum()[["Cantidad"]]
+ 
+            products_sold = px.pie(
+            all_products_sold,
+            values = 'Cantidad',
+            names = all_products_sold.index
+            )
+            products_sold.update_layout(height = 500, showlegend= False)
+            products_sold.update_traces(textposition = 'inside', textinfo = 'percent+label', hole = .3)            
+            st.plotly_chart(products_sold) 
