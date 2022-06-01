@@ -47,7 +47,7 @@ def app():
         cardmetric = ((13644.68 / total_cards) * 100)
         metricresultcard = f"{100 - cardmetric:,.2f}%"
         col2.metric(label = '', value = '', delta = metricresultcard)
-        col2.metric(label = '', value = '', delta = f"${total_cards - 13644.68}")    
+        col2.metric(label = '', value = '', delta = f"${total_cards - 13644.68:,.2f}")    
     with col3:
         st.subheader("Per Day:") 
         st.subheader(f"${average_per_day:,.2f}")   
