@@ -37,45 +37,45 @@ def app():
     with col1:
         st.subheader("Cash:")
         st.subheader(f"${total_cash:,.2f}")
-        cashmetric = ((16868.47 / total_cash) * 100)   # Using Up or down trend percentage formula to determine the different in results compared to last years
+        cashmetric = ((20187.96/ total_cash) * 100)   # Using Up or down trend percentage formula to determine the different in results compared to last years
         metricresult = f"{100 - cashmetric:,.2f}%"  
         col1.metric(label = '', value = '', delta = metricresult)  
-        col1.metric(label = '', value = '', delta = f"${total_cash - 16868.47:,.2f}")  
+        col1.metric(label = '', value = '', delta = f"${total_cash - 20187.96:,.2f}")  
     with col2:
         st.subheader("Cards:")
         st.subheader(f"${total_cards:,.2f}")
-        cardmetric = ((11385.6 / total_cards) * 100)
+        cardmetric = ((13644.68 / total_cards) * 100)
         metricresultcard = f"{100 - cardmetric:,.2f}%"
         col2.metric(label = '', value = '', delta = metricresultcard)
-        col2.metric(label = '', value = '', delta = f"${total_cards - 11385.6}")    
+        col2.metric(label = '', value = '', delta = f"${total_cards - 13644.68}")    
     with col3:
         st.subheader("Per Day:") 
         st.subheader(f"${average_per_day:,.2f}")   
-        perdaymetric = ((283.2925 / average_per_day) * 100)
+        perdaymetric = ((275.925/ average_per_day) * 100)
         metricresultperday = f"{100 - perdaymetric:,.2f}%"
         col3.metric(label = '', value = '', delta = metricresultperday)
-        col3.metric(label = '', value = '', delta = f"${average_per_day - 283.2925:,.2f}")
+        col3.metric(label = '', value = '', delta = f"${average_per_day - 275.925:,.2f}")
     with col4:
         st.subheader("Per Bill:")
         st.subheader(f"${average_sales:,.2f}")
-        averagemetric = ((17.965 / average_sales) * 100)
+        averagemetric = ((17.798 / average_sales) * 100)
         metricresultaverage = f"{100 - averagemetric:,.2f}%"
         col4.metric(label = '', value = '', delta = metricresultaverage)
-        col4.metric(label = '', value = '', delta = f"${average_sales - 17.965:,.2f}")    
+        col4.metric(label = '', value = '', delta = f"${average_sales - 17.798:,.2f}")    
     with col5:
         st.subheader("Expenses:")
         st.subheader(f"${expenses:,.2f}")
-        expensesmetric = ((11682.76 / expenses) * 100)
+        expensesmetric = ((14965.66 / expenses) * 100)
         metricresultexpenses = f"{100 - expensesmetric:,.2f}%"
         col5.metric(label = '', value = '', delta = metricresultexpenses, delta_color = "inverse") 
-        col5.metric(label = '', value = '', delta = f"${expenses - 11682.76:,.2f}", delta_color = "inverse")    
+        col5.metric(label = '', value = '', delta = f"${expenses - 14965.66:,.2f}", delta_color = "inverse")    
     with col6:
         st.subheader("Total Sales:")
         st.subheader(f"${total_sales:,.2f}")
-        totalmetric = ((28207.07 / total_sales) * 100)
+        totalmetric = ((33875.65 / total_sales) * 100)
         metricresulttotal = f"{100 - totalmetric:,.2f}%"
         col6.metric(label = '', value = '', delta = metricresulttotal) 
-        col6.metric(label = '', value = '', delta = f"${total_sales - 28207.07:,.2f}")
+        col6.metric(label = '', value = '', delta = f"${total_sales - 33875.65:,.2f}")
     st.markdown("*The metrics demonstrate the change in performance compared to 2021's stats*")    
     st.markdown("---")
 
