@@ -125,7 +125,7 @@ def app():
             sheet_name = 'EXPENSES'
             df = pd.read_excel(excel_file,
                       sheet_name = sheet_name,
-                      usecols = 'E : G',
+                      usecols = 'A : G',
                       nrows = 16)
             return df
         df = get_data_from_excel()  
@@ -142,6 +142,7 @@ def app():
         name = '2022 Sales', 
         marker = dict( color= 'green')
         )
+        
         data = [fig3, fig4]  ## Created an array to joint both figures in one table
         layout = go.Layout(title = 'Sales 2021 Vs 2022', 
                             plot_bgcolor='rgba(0,0,0,0)', # plot_bgcolor will remove the background
@@ -153,9 +154,99 @@ def app():
         figure = go.Figure(data = data, layout = layout)
         figure.for_each_yaxis(lambda y: y.update(showgrid=False)) # This will delete the grid for y axis
         st.plotly_chart(figure)
+        
+    st.markdown("---")
+
+    @st.experimental_memo
+    def get_data_from_excel():    
+        excel_file = 'POSTO 2022.xlsx'
+        sheet_name = 'WineAnalysis'
+        wine = pd.read_excel(excel_file,
+                  sheet_name = sheet_name,
+                  usecols = 'A : C',
+                  nrows = 16)
+        return wine
+    wine = get_data_from_excel()
+
+    col7, col8 = st.columns(2)
+    with col8:  
+        with st.container():        
+            sales = go.Bar(
+            x = wine["Fecha"],
+            y = wine.Sales,
+            name = 'Sales',
+            marker = dict( color= 'violet')
+
+            )
+            expenses = go.Scatter(
+            x = wine["Fecha"],
+            y = wine.Expenses,
+            mode = 'markers+lines',
+            name = 'Expenses', 
+            marker = dict( color= 'red')
+            )
+
+            data = [sales, expenses]  ## Created an array to joint both figures in one table
+
+            layout = go.Layout(title = 'Wine Expenses Vs Wine Sales', 
+                                plot_bgcolor='rgba(0,0,0,0)', # plot_bgcolor will remove the background
+                                font=dict(
+                                family="Courier New, monospace",
+                                size=15,
+                                color="white")
+                                ) 
+            figure = go.Figure(data = data, layout = layout)
+            figure.for_each_yaxis(lambda y: y.update(showgrid=False)) # This will delete the grid for y axi
+
+            st.plotly_chart(figure)
+            cantidad_vendida = (wine['Sales'].sum())
+            wine_expenses = (wine['Expenses'].sum())
+            st.markdown(f"Wine Sales: ${cantidad_vendida:,.2f}" " " "---" f" Wine Expenses: {wine_expenses}")
+        
+
+    @st.experimental_memo
+    def get_data_from_excel():    
+        excel_file = 'POSTO 2022.xlsx'
+        sheet_name = 'EXPENSES'
+        df = pd.read_excel(excel_file,
+                  sheet_name = sheet_name,
+                  usecols = 'A : G',
+                  nrows = 16)
+        return df
+    df = get_data_from_excel()  
+    
+    with col7:
+        fig0 = go.Bar(
+        x = df["Fecha"],
+        y = df.Sales,
+        name = 'Sales',
+        marker = dict( color= 'green')
+
+        )
 
 
+        fig2 = go.Scatter(
+        x = df["Fecha"],
+        y = df.Expenses,
+        mode = 'markers+lines',
+        name = 'Expenses', 
+        marker = dict( color= 'red')
+        )
 
+        data = [fig0, fig2]  ## Created an array to joint both figures in one table
 
+        layout = go.Layout(title = 'Expenses Vs Sales', 
+                            plot_bgcolor='rgba(0,0,0,0)', # plot_bgcolor will remove the background
+                            font=dict(
+                            family="Courier New, monospace",
+                            size=15,
+                            color="white")
+                            ) 
+
+        figure = go.Figure(data = data, layout = layout)
+        figure.for_each_yaxis(lambda y: y.update(showgrid=False)) # This will delete the grid for y axis
+
+        st.plotly_chart(figure)
+    st.markdown("---")
 
 
