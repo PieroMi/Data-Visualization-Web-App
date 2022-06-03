@@ -19,21 +19,21 @@ def app():
     def get_data_from_excel():
         df = pd.read_excel(
         io = excel_file, 
-        sheet_name='SEPTEMBER', 
+        sheet_name='OCTOBER', 
         usecols='B:AU',
         nrows=33
         )
         return df
     df = get_data_from_excel()
 
-    st.title(":pizza: September Sales")
+    st.title(":pizza: October Sales")
     st.markdown("##")
 
     total_cash = (df["EFECTIVO"].sum())
     total_cards = (df['Tarjetas'].sum())
     total_sales = (df['TOTAL'].sum())
-    average_salesSeptember = total_sales / df['Cobrados'].sum()
-    average_perDay = total_sales / 26
+    average_salesOctober = total_sales / df['Cobrados'].sum()
+    average_perDay = total_sales / 27
 
     cash_column, card_column, average_column, average_perDay_column, total_column = st.columns(5)
     with cash_column:
@@ -44,7 +44,7 @@ def app():
         st.subheader(f"US $ {total_cards:,.2f}") 
     with average_column:
         st.subheader("Average Per Sale:") 
-        st.subheader(f"US ${average_salesSeptember:,.2f}")
+        st.subheader(f"US ${average_salesOctober:,.2f}")
     with average_perDay_column:
         st.subheader("Average Per Day:")
         st.subheader(f"US ${average_perDay:,.2f}")
@@ -125,13 +125,13 @@ def app():
         products_sold.update_traces(textposition = 'inside', textinfo = 'percent+label')
         st.plotly_chart(products_sold)        
 
-    september_tab = st.sidebar.checkbox('Expenses')
+    october_tab = st.sidebar.checkbox('📉Expenses')
 
     inventory_expenses = (df["Cost"].sum())
     employee_expenses = (df["Salary"].sum())
     total_expenses = (df["Cost"]).sum() + (df["Salary"]).sum()
 
-    if september_tab:
+    if october_tab:
         st.title(":chart_with_downwards_trend: Expenses")
         st.markdown("##")
         inv_expense_column, employee_salary_column, total_expenses_column = st.columns(3)
@@ -146,15 +146,15 @@ def app():
             st.subheader(f"US $ {total_expenses:,.2f}")
         st.markdown("---")
         
-        september_expense_column, september_expense_pie_column = st.columns(2)
+        october_expense_column, october_expense_pie_column = st.columns(2)
         
-        with september_expense_column:
-            septemberExpenses = df.groupby(by=(["Expenses"])).sum()[["Cost"]].sort_values(by="Cost")
+        with october_expense_column:
+            octoberExpenses = df.groupby(by=(["Expenses"])).sum()[["Cost"]].sort_values(by="Cost")
 
             expenses = px.bar(
-                    septemberExpenses,
+                    octoberExpenses,
                     x="Cost",
-                    y=septemberExpenses.index,
+                    y=octoberExpenses.index,
                     orientation='h',
                     color_discrete_sequence=px.colors.sequential.RdBu,
                     template = "plotly_white"
@@ -167,7 +167,7 @@ def app():
                 )
             st.plotly_chart(expenses)
 
-        with september_expense_pie_column:
+        with october_expense_pie_column:
             expenses_pie = df.groupby(by=["Item"]).sum()[["Expense"]]
 
             expenses_pie_ = px.pie(
@@ -178,4 +178,3 @@ def app():
                     color_discrete_sequence=px.colors.sequential.RdBu
             )
             st.plotly_chart(expenses_pie_)
-
