@@ -146,7 +146,7 @@ def app():
         st.plotly_chart(products_sold)
     
 
-    january_tab = st.sidebar.checkbox('Expenses')
+    january_tab = st.sidebar.checkbox('📉Expenses')
 
     inventory_expenses = (df["Cost"].sum())
     employee_expenses = (df["Salary"].sum())
