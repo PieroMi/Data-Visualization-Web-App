@@ -1,0 +1,6 @@
+[theme]
+base="dark"
+backgroundColor="#919e8b"
+
+[server]
+port = 80
