@@ -7,6 +7,7 @@ from PIL import Image
 from pages.Report2021 import app
 from pages2.ProductAnalysis import app as app1
 from pages3.Report2022 import app as app2
+from pages3.ProductAnalysis2022 import app as app3
 
 # To manage multiple apps in the program
 class Multipage:
@@ -61,4 +62,7 @@ class Multipage:
 
         elif selected_page == pages['2022']:
             pages3 = {'title': '', 'function' : app2}
+            pages4 = {'title': '', 'function' : app3}
+
             pages3['function']()
+            pages4['function']()        
