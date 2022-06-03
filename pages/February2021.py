@@ -125,7 +125,7 @@ def app():
         products_sold.update_traces(textposition = 'inside', textinfo = 'percent+label')
         st.plotly_chart(products_sold)        
 
-    february_tab = st.sidebar.checkbox('Expenses')
+    february_tab = st.sidebar.checkbox('📉Expenses')
 
     inventory_expenses = (df["Cost"].sum())
     employee_expenses = (df["Salary"].sum())
