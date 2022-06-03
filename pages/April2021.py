@@ -15,7 +15,7 @@ excel_file = 'POSTO SALES.xlsx'
 
 
 def app():
-    @st.experimental_memo
+    @st.experimental_memo  # This will cache the file(s) 
     def get_data_from_excel():
         df = pd.read_excel(
         io = excel_file, 
@@ -29,14 +29,14 @@ def app():
     st.title(":pizza: April Sales")
     st.markdown("##")
 
-    total_cash = (df["EFECTIVO"].sum())
+    total_cash = (df["EFECTIVO"].sum())   # Creating variables to get the sum from a selected row/column of my dataframe 
     total_cards = (df['Tarjetas'].sum())
     total_sales = (df['TOTAL'].sum())
     average_salesApril = total_sales / df['Cobrados'].sum()
     average_perDay = total_sales / 24
 
     cash_column, card_column, average_column, average_perDay_column, total_column = st.columns(5)
-    with cash_column:
+    with cash_column:                                          # Getting the sum and displaying it in a column
         st.subheader("Total Cash:")
         st.subheader(f"US $ {total_cash:,.2f}")
     with card_column:
@@ -56,9 +56,9 @@ def app():
     top5_column, sales_by_hour_column = st.columns(2)
 
     sales_by_product = df.groupby(by=["Product"]).sum()[["Total Sold"]].sort_values(by="Total Sold")
-
+    # A variable that will group my dataframe from the selected columns. Product X Total Sold
     with top5_column:
-        products_Sales = px.bar(
+        products_Sales = px.bar(   # Once grouped it allows me display the dataframe in a bar chart Product(x) X Total Sold(y)
             sales_by_product,
             x="Total Sold",
             y=sales_by_product.index,
@@ -70,14 +70,14 @@ def app():
 
         products_Sales.update_layout(
             plot_bgcolor = "rgba(0,0,0,0)",
-            xaxis=(dict(showgrid=False))
+            xaxis=(dict(showgrid=False))   # xaxis on the chart wll be hidden
         )
 
         st.plotly_chart(products_Sales)    
 
     with sales_by_hour_column:
-        sales_by_hour = df.groupby(by=["Time"]).sum()
-
+        sales_by_hour = df.groupby(by=["Time"]).sum() # Grouping the "Time" columns and adding its values
+                                                      # I am grouping every hour of the day for the whole year and adding the values.
         sold_by_the_hour = px.bar(
             sales_by_hour,
             x=sales_by_hour.index,
@@ -97,8 +97,8 @@ def app():
 
     with soldPerHourColumn:
         fg_sales = df.groupby(by=["Product"]).sum()[["Hora 11" , "Hora 12" , "Hora 13" ,"Hora 14" , "Hora 15" , "Hora 16" , "Hora 17" ,"Hora 18" , "Hora 19" , "Hora 20" , "Hora 21" , "Hora 22" , "Hora 23"]]
-
-        sales_hour = px.bar(
+                                # Grouping each product with the hour of the day to gather the data
+        sales_hour = px.bar(    # It will return the sum of each hour with the name of the product
                 fg_sales,
                 x=fg_sales.index,
                 y=["Hora 11" , "Hora 12" , "Hora 13", "Hora 14" , "Hora 15" , "Hora 16" , "Hora 17" ,"Hora 18" , "Hora 19" , "Hora 20" , "Hora 21" , "Hora 22" , "Hora 23"],
@@ -113,7 +113,7 @@ def app():
         st.plotly_chart(sales_hour)
 
     with productsPie:
-        all_products_sold = df.groupby(by=["Producto"]).sum()[["Cantidad"]]
+        all_products_sold = df.groupby(by=["Producto"]).sum()[["Cantidad"]]  # Creating a pie chart that returns the dataframe of the sum of each product sold
 
         products_sold = px.pie(
                 all_products_sold,
@@ -122,12 +122,12 @@ def app():
         )
 
         products_sold.update_layout(height = 500, showlegend= False, title_text='<b>All Products Sold</b>')
-        products_sold.update_traces(textposition = 'inside', textinfo = 'percent+label')
+        products_sold.update_traces(textposition = 'inside', textinfo = 'percent+label') # Labeling the pie chart to hide texts, etc.
         st.plotly_chart(products_sold)        
 
-    april_tab = st.sidebar.checkbox('Expenses')
+    april_tab = st.sidebar.checkbox('📉Expenses') # Checkbox button widge to display the expenses if wish to see
 
-    inventory_expenses = (df["Cost"].sum())
+    inventory_expenses = (df["Cost"].sum()) 
     employee_expenses = (df["Salary"].sum())
     total_expenses = (df["Cost"]).sum() + (df["Salary"]).sum()
 
