@@ -43,7 +43,7 @@ def app():
         st.subheader("Total Cards:")
         st.subheader(f"US $ {total_cards:,.2f}") 
     with average_column:
-        st.subheader("Average Per Transaction:") 
+        st.subheader("Average Per Sale:") 
         st.subheader(f"US ${average_salesSeptember:,.2f}")
     with average_perDay_column:
         st.subheader("Average Per Day:")
@@ -125,7 +125,7 @@ def app():
         products_sold.update_traces(textposition = 'inside', textinfo = 'percent+label')
         st.plotly_chart(products_sold)        
 
-    september_tab = st.sidebar.checkbox('Expenses')
+    september_tab = st.sidebar.checkbox('📉Expenses')
 
     inventory_expenses = (df["Cost"].sum())
     employee_expenses = (df["Salary"].sum())
