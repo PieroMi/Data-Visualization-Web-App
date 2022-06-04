@@ -145,7 +145,7 @@ def app():
             st.subheader("Total Expenses:")
             st.subheader(f"US $ {total_expenses:,.2f}")
         st.markdown("---")
-        
+        #
         april_expense_column, april_expense_pie_column = st.columns(2)
         
         with april_expense_column:
