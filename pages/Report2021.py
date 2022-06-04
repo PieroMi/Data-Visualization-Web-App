@@ -24,11 +24,11 @@ def app():
             return report2021
     report2021 = get_data_from_excel()    
 
-    total_cash = (report2021["Cash"].sum())
-    total_cards = (report2021["Tarjetas"].sum())
+    total_cash = (report2021["Cash"].sum()) # Getting the sum for each column from the dataframe
+    total_cards = (report2021["Tarjetas"].sum())  # Same logic is applied to the rest
     total_sales = (report2021["Total"].sum())
-    average_sales = total_sales / report2021['Cobrado'].sum()
-    average_per_day = total_sales/ report2021['Days Worked'].sum()
+    average_sales = total_sales / report2021['Cobrado'].sum() # Getting the average sale per bill by diving the total by how many receipts we got
+    average_per_day = total_sales/ report2021['Days Worked'].sum() # The average per day is calculate by the total sales to the amount of days worked
     expenses = (report2021["Expenses"].sum())
 
     col1, col2, col3, col4, col5, col6 = st.columns(6)
@@ -75,8 +75,8 @@ def app():
         fig.update_traces(line_color = "green")
 
         fig.update_layout(
-        title="Total Vendido Por Hora",
-        xaxis_title="Hora",
+        title="Total Sold Per Hour",
+        xaxis_title="Hour",
         yaxis_title="Total",
         font=dict(
             family="Courier New, monospace",
