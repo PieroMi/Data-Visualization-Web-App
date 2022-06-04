@@ -8,3 +8,10 @@
 
 </h2>
 
+<h2 align="center">
+
+<img src="https://media.giphy.com/media/bIPNNUW0ghs0PjdvlZ/giphy.gif" width="50%">
+
+<img src="https://media.giphy.com/media/nzEvEMGwovexWZrIzv/giphy.gif" width="50%">
+
+</h2>
