@@ -15,7 +15,7 @@ import plotly.graph_objects as go
 excel_file = 'POSTO SALES.xlsx' 
 
 def app():
-    @st.experimental_memo
+    @st.experimental_memo   # Cache
     def get_data_from_excel():    
         excel_file = 'POSTO SALES.xlsx'
         sheet_name = 'SLICES'
@@ -26,27 +26,27 @@ def app():
         return df
     df = get_data_from_excel()
 
-    product = ['', 'Slices', 'Pizzas', 'Drinks', 'Wines', 'Beers', 'Sweets & Others']
-    select_product = st.sidebar.selectbox("Select A Category To Analyze its Performance", product)
+    product = ['', 'Slices', 'Pizzas', 'Drinks', 'Wines', 'Beers', 'Sweets & Others'] # A dict that is represented by a variable 
+    select_product = st.sidebar.selectbox("Select A Category To Analyze its Performance", product) # That variable is used in the selectbox widget
 
     if select_product == 'Slices':
 
 
-        producto = st.sidebar.multiselect("Select the Product:",
-                                   options= df["Producto"].unique(),
-                                   default= df["Producto"].unique()
+        producto = st.sidebar.multiselect("Select the Product:", # The multiselect widget returns a list of strings that contain the selected options
+                                   options= df["Producto"].unique(), # Returns the product name from the producto column
+                                   default= df["Producto"].unique()  
                                    )
         Hora = st.sidebar.multiselect("Select the Hour:",
                                    options= df["Hora"].unique(),
                                    default= df["Hora"].unique()
                                    )
 
-        df_selection = df.query(
+        df_selection = df.query( # Will query all the columns 
                                 "Producto == @producto & Hora == @Hora"
         )
         col1, col2, col3 = st.columns(3)
         with col1:
-            cantidad_vendida = (df_selection['Cantidad'].sum()) 
+            cantidad_vendida = (df_selection['Cantidad'].sum()) # Because we queried Product and Hour to 1 variable it allows me to gather the total quantity sold per product and per hour
             st.subheader(f"Products sold: {cantidad_vendida:,.2f}")  
         with col2:
             valor_vendida = (df_selection['Valor'].sum()) 
