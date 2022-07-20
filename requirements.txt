@@ -1,6 +1,4 @@
 altair==4.1.0
-ipython==7.24.1
-ipython-genutils==0.2.0
 ipywidgets==7.6.3
 matplotlib==3.4.2
 matplotlib-inline==0.1.2
@@ -14,7 +12,7 @@ pandocfilters==1.4.3
 parso==0.8.2
 patsy==0.5.1
 pickleshare==0.7.5
-pipenv==2021.5.29
+pipenv==2022.7.4
 platformdirs==2.3.0
 plotly==5.1.0
 prometheus-client==0.11.0
