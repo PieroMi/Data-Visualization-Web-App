@@ -2,7 +2,6 @@ altair==4.1.0
 ipywidgets==7.6.3
 matplotlib==3.4.2
 matplotlib-inline==0.1.2
-notebook==6.4.0
 numpy==1.23.1
 openpyxl==3.0.7
 packaging==20.9
