@@ -4,7 +4,7 @@ ipython-genutils==0.2.0
 ipywidgets==7.6.3
 jupyter-client==6.1.12
 jupyter-core==4.7.1
-jupyter-server==1.13.5
+jupyter-server==1.15.4
 jupyterlab==3.2.9
 jupyterlab-pygments==0.1.2
 jupyterlab-server==2.10.3
