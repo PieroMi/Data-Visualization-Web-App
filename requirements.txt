@@ -21,7 +21,6 @@ pandocfilters==1.4.3
 parso==0.8.2
 patsy==0.5.1
 pickleshare==0.7.5
-Pillow==8.2.0
 pipenv==2021.5.29
 platformdirs==2.3.0
 plotly==5.1.0
