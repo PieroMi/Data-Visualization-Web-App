@@ -15,7 +15,7 @@ excel_file = 'POSTO SALES.xlsx'
 
 
 def app():
-    @st.experimental_memo  # This will cache the file(s) 
+    @st.cache_data  # This will cache the file(s) 
     def get_data_from_excel():
         df = pd.read_excel(
         io = excel_file, 

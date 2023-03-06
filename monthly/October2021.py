@@ -15,7 +15,7 @@ excel_file = 'POSTO SALES.xlsx'
 
 
 def app():
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():
         df = pd.read_excel(
         io = excel_file, 
