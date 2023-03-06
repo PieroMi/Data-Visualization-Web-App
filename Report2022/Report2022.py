@@ -14,7 +14,7 @@ import plotly.graph_objects as go
 
 def app():
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
             excel_file = 'POSTO 2022.xlsx'
             sheet_name = '2022 Report'
@@ -79,7 +79,7 @@ def app():
     st.markdown("*The metrics demonstrate the change in performance compared to 2021's stats*")    
     st.markdown("---")
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
         excel_file = 'POSTO 2022.xlsx'
         sheet_name = 'EXPENSES'
@@ -119,7 +119,7 @@ def app():
         st.plotly_chart(figure)
 
     with col7:
-        @st.experimental_memo
+        @st.cache_data
         def get_data_from_excel():    
             excel_file = 'POSTO 2022.xlsx'
             sheet_name = 'EXPENSES'
@@ -157,7 +157,7 @@ def app():
         
     st.markdown("---")
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
         excel_file = 'POSTO 2022.xlsx'
         sheet_name = 'WineAnalysis'
@@ -204,7 +204,7 @@ def app():
             st.markdown(f"Wine Sales: ${cantidad_vendida:,.2f}" " " "---" f" Wine Expenses: {wine_expenses}")
         
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
         excel_file = 'POSTO 2022.xlsx'
         sheet_name = 'EXPENSES'
