@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 
 def app():
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
             excel_file = 'POSTO SALES.xlsx'
             sheet_name = '2021 Report'
@@ -56,7 +56,7 @@ def app():
 
     col6, col7 = st.columns(2)
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
             excel_file = 'POSTO SALES.xlsx'
             sheet_name = 'HOURS'
@@ -91,7 +91,7 @@ def app():
 
  
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
         excel_file = 'POSTO SALES.xlsx'
         sheet_name = 'EXPENSES'
@@ -136,7 +136,7 @@ def app():
         st.plotly_chart(figure)
     st.markdown("---")
 
-    @st.experimental_memo
+    @st.cache_data
     def get_data_from_excel():    
         excel_file = 'POSTO SALES.xlsx'
         sheet_name = 'Sub Categories'
@@ -172,7 +172,7 @@ def app():
         st.plotly_chart(fig3)
 
     with col2:
-        @st.experimental_memo
+        @st.cache_data
         def get_data_from_excel():    
             excel_file = 'POSTO SALES.xlsx'
             sheet_name = 'WinesAnalysis'
