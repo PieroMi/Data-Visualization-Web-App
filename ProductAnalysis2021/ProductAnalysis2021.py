@@ -15,7 +15,7 @@ import plotly.graph_objects as go
 excel_file = 'POSTO SALES.xlsx' 
 
 def app():
-    @st.experimental_memo   # Cache
+    @st.cache_data   # Cache
     def get_data_from_excel():    
         excel_file = 'POSTO SALES.xlsx'
         sheet_name = 'SLICES'
@@ -89,7 +89,7 @@ def app():
 
     if select_product == 'Drinks':
 
-        @st.experimental_memo
+        @st.cache_data
         def get_data_from_excel():    
                 excel_file = 'POSTO SALES.xlsx'
                 sheet_name = 'DRINKS'
@@ -157,7 +157,7 @@ def app():
 
     if select_product == 'Pizzas':
 
-        @st.experimental_memo
+        @st.cache_data
         def get_data_from_excel():    
                 excel_file = 'POSTO SALES.xlsx'
                 sheet_name = 'PIZZAS'
@@ -225,7 +225,7 @@ def app():
             st.plotly_chart(products_sold) 
 
     if select_product == 'Wines':
-        @st.experimental_memo
+        @st.cache_data
         def get_data_from_excel():    
                 excel_file = 'POSTO SALES.xlsx'
                 sheet_name = 'WINES'
@@ -293,7 +293,7 @@ def app():
             st.plotly_chart(products_sold) 
                       
     if select_product == 'Sweets & Others':
-        @st.experimental_memo
+        @st.cache_data
         def get_data_from_excel():    
                 excel_file = 'POSTO SALES.xlsx'
                 sheet_name = 'SWEETS'
@@ -362,7 +362,7 @@ def app():
           
                         
     if select_product == 'Beers':
-        @st.experimental_memo
+        @st.cache_data
         def get_data_from_excel():    
                 excel_file = 'POSTO SALES.xlsx'
                 sheet_name = 'BEERS'
