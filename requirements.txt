@@ -2,9 +2,9 @@ altair==4.2.0
 ipython==8.11.0
 ipython-genutils==0.2.0
 ipywidgets==7.6.3
-jupyter-client==6.1.12
-jupyter-core==5.3.1
-jupyter-server==2.7.2
+jupyter-client
+jupyter-core
+jupyter-server
 jupyterlab==3.2.9
 jupyterlab-pygments==0.1.2
 jupyterlab-server==2.10.3
